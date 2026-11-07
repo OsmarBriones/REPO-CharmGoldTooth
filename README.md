@@ -34,7 +34,7 @@ Settings are in `com.osmar.CharmGoldTooth.cfg` inside `BepInEx/config`, section 
 - `EatAtFullHealth` (default `0`, 0 or 1): `1` lets you eat when your health is full (the food is wasted).
 - `FoodPrefabNames` (text, same section): the valuables that count as food, separated by commas. Read once when the game starts, so restart after changing it; every player should use the same list, and the host's list decides what is really consumed. A name ending in `*` matches every name that starts with it. Default: Toast, Banana Bow, Red Mushroom, Gumball, Egg, Gem Burger, Milk and Pills.
 
-Section `Debug`: `DebugMode` (default `false`) places a Gold Tooth on the floor in front of you when a level starts (host or singleplayer) and writes extra log lines. For testing.
+Section `Debug`: `DebugMode` (default `false`) places a Gold Tooth on the floor in front of you when a level starts (host or singleplayer) and writes extra log lines. For testing. `SpawnNow` (default `false`, needs `DebugMode`): set it to `true` while a level is running to place one right away; it switches itself back off.
 
 ## Issues & Bug Reports
 The official way to report issues, suggest improvements, or submit feedback is by opening an issue on the official GitHub repository:
