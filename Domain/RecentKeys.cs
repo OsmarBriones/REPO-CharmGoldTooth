@@ -9,6 +9,7 @@ namespace CharmGoldTooth.Domain
 	internal sealed class RecentKeys
 	{
 		private readonly Dictionary<int, float> expiry = new Dictionary<int, float>();
+		private readonly List<int> old = new List<int>();
 
 		internal int Count => expiry.Count;
 
@@ -42,7 +43,7 @@ namespace CharmGoldTooth.Domain
 				return;
 			}
 
-			List<int> old = new List<int>();
+			old.Clear();
 			foreach (KeyValuePair<int, float> entry in expiry)
 			{
 				if (now >= entry.Value)

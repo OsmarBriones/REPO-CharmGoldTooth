@@ -66,3 +66,13 @@ The build and unit tests prove the logic and that the game members exist, not th
 - **Double-heal guard:** `RecentKeys` remembers the eaten valuable for 3 s and is cleared when the charm deactivates. Key: view id in multiplayer, instance id alone (same rule as Pockets' `PocketedValuable.Key`).
 - **No cooldown:** the food being consumed is the limit; `TryUse()` only applies the wear.
 - **Dead players** cannot eat. The food list is not host-synced (CharmCore syncs numbers only).
+
+## Runtime hygiene
+
+Checked against `RepoKit/references/runtime-hygiene.md`, item by item (not verified in game; build and unit tests only).
+
+1. Lifetime of references: fixed. `Resolve` no longer calls `Object.FindObjectsByType<PhysGrabObject>` (scene-wide). Alone it compares the key with the sender's held valuable, in multiplayer it uses `PhotonView.Find`; the validation rules (food list, held by sender, not pocketed) are unchanged. `Recent` (ids and times only) is now also cleared in `OnLevelEnded`, not only `OnDeactivated`.
+2. Work frequency: `Update` returns at once while the charm is inactive, and the "recently eaten" prune now runs only on an E press instead of every frame. ok otherwise (no scans).
+3. Allocations: fixed. `RecentKeys.Prune` reuses a buffer; `IsHeldBy` no longer copies the grabber list with `ToArray`. Debug lines that interpolate strings are guarded with a debug-mode check. No LINQ, `Find...` or new collections in per-frame code.
+4. UI: not applicable, this mod touches no UI.
+5. Patches: not applicable, this mod has no Harmony patches.

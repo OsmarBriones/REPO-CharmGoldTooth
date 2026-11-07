@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using CharmCore.Api;
 using CharmGoldTooth.Domain;
 using Photon.Pun;
-using UnityEngine;
 
 namespace CharmGoldTooth
 {
@@ -40,6 +40,11 @@ namespace CharmGoldTooth
 			Recent.Clear();
 		}
 
+		protected override void OnLevelEnded()
+		{
+			Recent.Clear();
+		}
+
 		/// <summary>
 		/// Host only: checks the sender really holds a food valuable that is not in a pocket, then destroys it.
 		/// (<c>PhysGrabObject.DestroyPhysGrabObject</c> only acts on the master client.)
@@ -58,7 +63,7 @@ namespace CharmGoldTooth
 				return;
 			}
 
-			PhysGrabObject? physGrabObject = Resolve(key);
+			PhysGrabObject? physGrabObject = Resolve(sender, key);
 			ValuableObject? valuable = physGrabObject != null ? physGrabObject.GetComponent<ValuableObject>() : null;
 			if (physGrabObject == null || valuable == null)
 			{
@@ -90,8 +95,10 @@ namespace CharmGoldTooth
 
 		private static bool IsHeldBy(PhysGrabObject physGrabObject, PlayerAvatar sender)
 		{
-			foreach (PhysGrabber grabber in physGrabObject.playerGrabbing.ToArray())
+			List<PhysGrabber> grabbing = physGrabObject.playerGrabbing;
+			for (int i = 0; i < grabbing.Count; i++)
 			{
+				PhysGrabber grabber = grabbing[i];
 				if (grabber != null && grabber.playerAvatar == sender)
 				{
 					return true;
@@ -101,7 +108,8 @@ namespace CharmGoldTooth
 			return false;
 		}
 
-		private static PhysGrabObject? Resolve(int key)
+		/// <summary>Finds the valuable behind a key with no scene search and no static reference. Alone the key is an instance id and only the sender's held valuable can be meant.</summary>
+		private static PhysGrabObject? Resolve(PlayerAvatar sender, int key)
 		{
 			if (SemiFunc.IsMultiplayer())
 			{
@@ -109,15 +117,9 @@ namespace CharmGoldTooth
 				return view != null ? view.GetComponent<PhysGrabObject>() : null;
 			}
 
-			foreach (PhysGrabObject candidate in Object.FindObjectsByType<PhysGrabObject>(FindObjectsSortMode.None))
-			{
-				if (candidate.gameObject.GetInstanceID() == key)
-				{
-					return candidate;
-				}
-			}
-
-			return null;
+			PhysGrabber? holder = sender.physGrabber;
+			PhysGrabObject? held = holder != null && holder.grabbed ? holder.grabbedPhysGrabObject : null;
+			return held != null && held.gameObject.GetInstanceID() == key ? held : null;
 		}
 	}
 }

@@ -21,12 +21,12 @@ namespace CharmGoldTooth
 				return;
 			}
 
-			Charm.Recent.Prune(Time.time);
 			if (!SemiFunc.InputDown(InputKey.Interact))
 			{
 				return;
 			}
 
+			Charm.Recent.Prune(Time.time);
 			TryEat();
 		}
 
@@ -43,13 +43,13 @@ namespace CharmGoldTooth
 			ValuableObject? valuable = physGrabObject.GetComponent<ValuableObject>();
 			if (valuable == null)
 			{
-				Charm.LogDebug($"E pressed: {physGrabObject.name} is not a valuable");
+				if (Charm.DebugMode) { Charm.LogDebug($"E pressed: {physGrabObject.name} is not a valuable"); }
 				return;
 			}
 
 			if (!Charm.Food.Matches(valuable.name))
 			{
-				Charm.LogDebug($"E pressed: {valuable.name} is not on the food list");
+				if (Charm.DebugMode) { Charm.LogDebug($"E pressed: {valuable.name} is not on the food list"); }
 				return;
 			}
 
@@ -65,14 +65,14 @@ namespace CharmGoldTooth
 			int key = ValuableKey.Of(SemiFunc.IsMultiplayer(), viewId, physGrabObject.gameObject.GetInstanceID());
 			if (Charm.Recent.Contains(key, Time.time))
 			{
-				Charm.LogDebug($"E pressed: {valuable.name} (key {key}) was just eaten; ignored");
+				if (Charm.DebugMode) { Charm.LogDebug($"E pressed: {valuable.name} (key {key}) was just eaten; ignored"); }
 				return;
 			}
 
 			float value = valuable.dollarValueCurrent;
 			int amount = BiteHealing.HealAmount(value, Charm.HealPerHundredDollars.Value);
 			bool atFullHealth = BiteHealing.IsOn(Charm.EatAtFullHealth.Value);
-			Charm.LogDebug($"E pressed on {valuable.name} (key {key}): value {value:0}, heal {amount}, health {health.health}/{health.maxHealth}, eat at full health {atFullHealth}");
+			if (Charm.DebugMode) { Charm.LogDebug($"E pressed on {valuable.name} (key {key}): value {value:0}, heal {amount}, health {health.health}/{health.maxHealth}, eat at full health {atFullHealth}"); }
 			if (!BiteHealing.ShouldEat(health.health, health.maxHealth, atFullHealth, amount))
 			{
 				Charm.LogDebug("Bite refused: nothing to heal, or health is full");
@@ -88,7 +88,7 @@ namespace CharmGoldTooth
 			}
 
 			health.Heal(amount, true);
-			Charm.LogDebug($"Golden Bite: healed {amount} (health now {health.health}/{health.maxHealth}); asking the host to consume key {key}");
+			if (Charm.DebugMode) { Charm.LogDebug($"Golden Bite: healed {amount} (health now {health.health}/{health.maxHealth}); asking the host to consume key {key}"); }
 			Charm.SendToHost(GoldToothCharm.EatAction, key);
 		}
 	}
