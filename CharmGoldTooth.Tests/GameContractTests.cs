@@ -30,9 +30,42 @@ public class GameContractTests
 	[TestMethod]
 	public void Valuable_HasTheValueFields()
 	{
-		// TODO: add one RequireField / RequireMethod line for every game member this charm's effect reads, writes or patches,
-		// so a game update that renames or removes one fails here with a clear message.
+		// The heal is computed from the food's current value; CharmCore wears the same field.
 		RequireField("ValuableObject", "dollarValueCurrent");
+	}
+
+	[TestMethod]
+	public void Input_HasTheInteractKey()
+	{
+		// E is read with SemiFunc.InputDown(InputKey.Interact).
+		RequireField("InputKey", "Interact");
+		RequireMethod("SemiFunc", "InputDown", 1);
+		RequireMethod("SemiFunc", "IsMultiplayer", 0);
+	}
+
+	[TestMethod]
+	public void Grabber_HasTheHeldObject()
+	{
+		// The owner reads what it holds; the host checks who holds a valuable.
+		RequireField("PhysGrabber", "instance");
+		RequireField("PhysGrabber", "grabbed");
+		RequireField("PhysGrabber", "grabbedPhysGrabObject");
+		RequireField("PhysGrabber", "playerAvatar");
+		RequireField("PhysGrabObject", "playerGrabbing");
+		RequireField("PhysGrabObject", "photonView");
+		RequireMethod("PhysGrabObject", "DestroyPhysGrabObject", 0);
+	}
+
+	[TestMethod]
+	public void Health_HasTheHealMethodAndFields()
+	{
+		RequireMethod("PlayerHealth", "Heal", 2);
+		RequireField("PlayerHealth", "health");
+		RequireField("PlayerHealth", "maxHealth");
+		RequireField("PlayerAvatar", "instance");
+		RequireField("PlayerAvatar", "playerHealth");
+		RequireField("PlayerAvatar", "deadSet");
+		RequireField("PlayerAvatar", "isDisabled");
 	}
 
 	// ---- Helpers ----
