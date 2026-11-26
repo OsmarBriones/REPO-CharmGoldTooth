@@ -9,7 +9,7 @@ Set `DebugMode = true` in the `Debug` section of `BepInEx/config/com.osmar.Charm
 - [ ] Log shows `Charm registered: Gold Tooth - Golden Bite` and `CharmGoldTooth 1.0.0 loaded!`.
 - [ ] Store the valuable in a slot: the slot shows its picture and value.
 - [ ] Hurt yourself first (a fall or a monster) so health is below the maximum. With `DebugMode` on, spawn or find a food valuable (Toast, Egg, Milk, Pills...).
-- [ ] Hold the food and press E: it disappears, health rises by about 1.5 HP per $100 of its value (log: `Golden Bite: healed N`), the heal flash shows, and the Gold Tooth value drops by about 30% of its original value.
+- [ ] Hold the food and press E: it disappears, health rises by about 10 HP per $100 of its value (log: `Golden Bite: healed N`), the heal flash shows, and the Gold Tooth value drops by about 30% of its original value.
 - [ ] Press E several times quickly on one food: only one heal and one wear (log: `was just eaten; ignored`).
 - [ ] Press E while holding a non-food valuable (for example a vase): nothing happens, no wear (log: `not on the food list`).
 - [ ] Press E holding nothing: nothing happens.
@@ -21,7 +21,7 @@ Set `DebugMode = true` in the `Debug` section of `BepInEx/config/com.osmar.Charm
 - [ ] Use it until the valuable breaks: the slot empties, the power stops, no errors in the log.
 
 ## Settings
-- [ ] `WearPercent = 0`: food heals, no wear. `HealPerHundredDollars = 0`: eating is refused. `10`: a $100 food heals 10.
+- [ ] `WearPercent = 0`: food heals, no wear. `HealPerHundredDollars = 0`: eating is refused. `25`: a $100 food heals 25.
 - [ ] `FoodPrefabNames = Valuable Museum Toast` (restart): only Toast works. Empty value: nothing counts as food.
 - [ ] Charm `Enabled = false`: no effect and no wear. CharmCore `Enabled = false`: nothing works.
 

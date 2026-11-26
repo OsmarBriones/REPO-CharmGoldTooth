@@ -1,7 +1,7 @@
 ## User Scenarios
 
 ### User Story 1 - Golden Bite (Priority: P1)
-A player stores the Gold Tooth in a pocket and gets this power while it stays there: press E while holding a food valuable to eat it and heal 1.5 HP per $100 of its current value.
+A player stores the Gold Tooth in a pocket and gets this power while it stays there: press E while holding a food valuable to eat it and heal 10 HP per $100 of its current value.
 **Acceptance**: with the valuable pocketed the power works; with it out of the pocket it does not; each bite consumes the food and wears the Gold Tooth by 30%.
 
 ## Requirements

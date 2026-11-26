@@ -19,7 +19,7 @@ namespace CharmGoldTooth
 		internal GoldToothCharm()
 			: base("GoldTooth", "Gold Tooth - Golden Bite", defaultWearPercent: 30f, defaultCooldownSeconds: null, PrefabName)
 		{
-			HealPerHundredDollars = AddSetting("HealPerHundredDollars", 1.5f, 0f, 25f, "Health points one bite heals for every $100 of the food's current value (rounded to a whole number, at least 1). 0 means eating heals nothing, so the bite is refused.");
+			HealPerHundredDollars = AddSetting("HealPerHundredDollars", 10f, 0f, 25f, "Health points one bite heals for every $100 of the food's current value (rounded to a whole number, at least 1). 0 means eating heals nothing, so the bite is refused.");
 			EatAtFullHealth = AddSetting("EatAtFullHealth", 0f, 0f, 1f, "0 = you cannot eat while your health is full (the food is kept), 1 = you can eat at full health and the food is wasted.");
 		}
 

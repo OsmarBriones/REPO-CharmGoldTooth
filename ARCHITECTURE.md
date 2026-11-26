@@ -4,7 +4,7 @@ A Charm mod (layer 3 of the PocketCharms family): one valuable, one power. It de
 
 ## The power: Golden Bite
 
-while the Gold Tooth is pocketed, pressing E (`InputKey.Interact`) while holding a food valuable consumes it and heals the owner 1.5 HP per $100 of its current value. Twin of the Tooth's Hearty Bite with the Gold Tooth numbers (the Tooth repository held only its stub when this was written, so the structure was designed independently; naming may differ).
+while the Gold Tooth is pocketed, pressing E (`InputKey.Interact`) while holding a food valuable consumes it and heals the owner 10 HP per $100 of its current value. Twin of the Tooth's Hearty Bite with the Gold Tooth numbers (the Tooth repository held only its stub when this was written, so the structure was designed independently; naming may differ).
 
 - `GoldToothCharm : Charm` registers the prefab name `Valuable Museum GoldTooth`, wear 30% per bite, no cooldown, the settings below, the food list, the short-lived `RecentKeys` set and the host handler `OnHostRequest`.
 - `GoldenBite` (a `MonoBehaviour` on the plugin object) runs on the owner's machine only while `Charm.IsActive`.
@@ -23,7 +23,7 @@ Host (`GoldToothCharm.OnHostRequest`, reached through CharmCore's event 183, whi
 ### Settings
 | Key | Type | Range | Default | Meaning |
 |---|---|---|---|---|
-| `HealPerHundredDollars` | float, HP per $100 | 0 to 25 | 1.5 | 0 disables the heal (and so the bite). Not negative: eating must not hurt. 25 caps the heal. |
+| `HealPerHundredDollars` | float, HP per $100 | 0 to 25 | 10 | 0 disables the heal (and so the bite). Not negative: eating must not hurt. 25 caps the heal. |
 | `EatAtFullHealth` | float used as 0/1 | 0 to 1 | 0 | 0.5 and above is on. |
 | `WearPercent` (CharmCore) | float | 0 to 100 | 30 | Wear per bite. |
 | `FoodPrefabNames` | string (plain `Bind`, read once at startup, local) | n/a | the eight prefab names | Comma, semicolon or line separated; case-insensitive; `(Clone)` ignored; trailing `*` = prefix match. |

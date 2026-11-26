@@ -7,7 +7,7 @@ Golden Bite: while the Gold Tooth is in your pocket, press E while holding food 
 ## How to Use
 
 1. Find the **Gold Tooth** valuable and store it in a free inventory slot with [Pockets](https://thunderstore.io/c/repo/p/OsmarBriones/Pockets/) (grab it, press the slot key).
-2. Pick up a food valuable (Toast, Banana Bow, Red Mushroom, Gumball, Egg, Gem Burger, Milk or Pills) and, while holding it, press **E**. You eat it: it is gone and you heal 1.5 health points for every $100 it is worth right now.
+2. Pick up a food valuable (Toast, Banana Bow, Red Mushroom, Gumball, Egg, Gem Burger, Milk or Pills) and, while holding it, press **E**. You eat it: it is gone and you heal 10 health points for every $100 it is worth right now.
 3. Take the valuable out of the pocket and the power stops.
 
 ## Features
@@ -30,7 +30,7 @@ Settings are in `com.osmar.CharmGoldTooth.cfg` inside `BepInEx/config`, section 
 
 - `Enabled` (default `true`): turn this charm on or off.
 - `WearPercent` (default `30`, 0 to 100): share of the Gold Tooth's original value lost on each bite.
-- `HealPerHundredDollars` (default `1.5`, 0 to 25): health points healed for every $100 of the food's current value, rounded to a whole number (at least 1). `0` makes eating pointless, so the bite is refused.
+- `HealPerHundredDollars` (default `10`, 0 to 25): health points healed for every $100 of the food's current value, rounded to a whole number (at least 1). `0` makes eating pointless, so the bite is refused.
 - `EatAtFullHealth` (default `0`, 0 or 1): `1` lets you eat when your health is full (the food is wasted).
 - `FoodPrefabNames` (text, same section): the valuables that count as food, separated by commas. Read once when the game starts, so restart after changing it; every player should use the same list, and the host's list decides what is really consumed. A name ending in `*` matches every name that starts with it. Default: Toast, Banana Bow, Red Mushroom, Gumball, Egg, Gem Burger, Milk and Pills.
 
